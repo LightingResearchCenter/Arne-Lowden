@@ -4,7 +4,7 @@ clear
 clc
 
 dataDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\croppedData';
-exportDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\daysigrams';
+exportDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\composites';
 
 % Load data
 data = loadData(dataDir);
@@ -22,15 +22,12 @@ for iObj = 1:n
     
     titleText = {'Arne Lowden - Stockholm';['ID: ',thisObj.ID,', Device SN: ',num2str(thisObj.SerialNumber)]};
     
-    d = d12pack.daysigram(thisObj,titleText);
+    d = d12pack.composite(thisObj,titleText);
     
-    for iFile = 1:numel(d)
-        d(iFile).Title = titleText;
-        
-        fileName = [thisObj.ID,'_',timestamp,'_p',num2str(iFile),'.pdf'];
-        filePath = fullfile(exportDir,fileName);
-        saveas(d(iFile).Figure,filePath);
-        close(d(iFile).Figure);
-        
-    end
+    d.Title = titleText;
+    
+    fileName = [thisObj.ID,'_',timestamp,'.pdf'];
+    filePath = fullfile(exportDir,fileName);
+    saveas(d.Figure,filePath);
+    close(d.Figure);
 end
