@@ -6,6 +6,13 @@ function validID = correctID(existingID, validIDList)
 strippedIDList = regexprep(validIDList,'_','');
 strippedID = regexprep(existingID,'_','');
 
+switch strippedID
+    case '3323816'
+        strippedID = '3623816';
+    case '342186'
+        strippedID = '342189';
+end
+
 % Find matching ID
 [Lia, Locb] = ismember(strippedID, strippedIDList);
 
