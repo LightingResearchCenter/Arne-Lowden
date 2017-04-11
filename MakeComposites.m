@@ -3,8 +3,8 @@ close all
 clear
 clc
 
-dataDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\croppedData';
-exportDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\composites';
+dataDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\batch 2\adjustedData';
+exportDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\batch 2\composites';
 
 % Load data
 data = loadData(dataDir);

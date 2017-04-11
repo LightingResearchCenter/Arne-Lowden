@@ -10,7 +10,7 @@ rootDir = '\\root\projects';
 calPath = fullfile(rootDir,'DaysimeterAndDimesimeterReferenceFiles',...
     'recalibration2016','calibration_log.csv');
 
-projectDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data';
+projectDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\batch 2';
 dataDir    = fullfile(projectDir,'originalData');
 
 timestamp = datestr(now,'yyyy-mm-dd_HHMM');
@@ -37,12 +37,16 @@ for iFile = nFile:-1:1
     obj.data_log = obj.readdatalog(datalogPaths{iFile});
     
     % Read CDF data
+    try
     cdfData = daysimeter12.readcdf(cdfPaths{iFile});
+    catch err
+        display(err)
+    end
     
     % Add ID
     obj.ID = cdfData.GlobalAttributes.subjectID;
     
-    disp(cdfData.Variables.timeOffset/60/60);
+%     disp(cdfData.Variables.timeOffset/60/60);
     
     % Add object to array of objects
     objArray(iFile,1) = obj;

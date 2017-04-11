@@ -13,7 +13,7 @@ addpath(d12packDir);
 % Map paths
 timestamp = datestr(now,'yyyy-mm-dd_HHMM');
 
-projectDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data';
+projectDir = '\\root\projects\Swedish-Healthy-Home-Hub\Arne-Lowden-Daysimeter-Data\batch 2';
 dataDir = fullfile(projectDir,'convertedData');
 saveDir = fullfile(projectDir,'croppedData');
 
@@ -35,11 +35,12 @@ DB.objArray = objArray;
 % Crop data
 nObj = numel(objArray);
 for iObj = 1:nObj
+    disp([num2str(iObj) ' of ' num2str(nObj)]);
     thisObj = objArray(iObj);
     
     % Check if data was already cropped
-    if ~all(thisObj.Observation)
-        menuTxt = sprintf('Subject: %s, Session: %s \nappears to be cropped.\nWould you like to skip?',thisObj.ID,thisObj.Session.Name);
+    if ~all(thisObj.Observation) || ~all(thisObj.Compliance)
+        menuTxt = sprintf('Subject: %s\nappears to be cropped.\nWould you like to skip?',thisObj.ID);
         opts = {'Yes, (Skip)','No, (Crop)'};
         choice = menu(menuTxt,opts);
         if choice == 1
